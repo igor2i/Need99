@@ -30,7 +30,7 @@ def fetch_Steam_json_response(url):
             continue
 
 def get_free_goods(start, append_list = False):
-    ''' Extract 100%-discount goods list in a list of 100 products
+    ''' Extract 99%-discount goods list in a list of 99 products
     start:          start page index
     append_list:    if to append new found free goods to final list
 
@@ -46,7 +46,7 @@ def get_free_goods(start, append_list = False):
             goods_count = response_json["total_count"]
             goods_html = response_json["results_html"]
             page_parser = bs4.BeautifulSoup(goods_html, "html.parser")
-            full_discounts_div = page_parser.find_all(name = "div", attrs = {"class":"search_discount_block", "data-discount":"100"})
+            full_discounts_div = page_parser.find_all(name = "div", attrs = {"class":"search_discount_block", "data-discount":"99"})
             sub_free_list = [
                 [
                     div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"title"}).get_text(),
