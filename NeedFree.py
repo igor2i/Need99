@@ -51,7 +51,7 @@ def get_free_goods(start, append_list = False):
                 [
                     div.parent.parent.parent.parent.find(name = "img").get_text(),
                     div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"title"}).get_text(),
-                    div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"search_review_summary"})['data-tooltip-html'],
+                    div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"search_review_summary"}).get_text(),
                     div.parent.parent.parent.parent.get("href"),
                 ] for div in full_discounts_div
             ]
