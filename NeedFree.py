@@ -49,10 +49,10 @@ def get_free_goods(start, append_list = False):
             full_discounts_div = page_parser.find_all(name = "div", attrs = {"class":"search_discount_block", "data-discount":"99"})
             sub_free_list = [
                 [
-                    div.parent.parent.parent.parent.find(name = "img").get("src"),
-                    div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"title"}).get_text(),
-                    div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"search_review_summary"}).get("data-tooltip-html"),
-                    div.parent.parent.parent.parent.get("href"),
+                    get_img_src(div),
+                    get_title(div),
+                    get_review_summary(div),
+                    get_href(div),
                 ] for div in full_discounts_div
             ]
 
@@ -68,6 +68,52 @@ def get_free_goods(start, append_list = False):
     print("get_free_goods: error on start = %d, throw" % (start))
 
     return 0
+
+
+def get_img_src(div):
+    try:
+        elem = div.parent.parent.parent.parent.find(name = "img")
+        if elem is None:
+            return "NONE"
+        else:
+            return elem.get("src")
+    except Exception as e:
+        print("get_img_src:")
+        print(div.parent.parent.parent.parent)
+        print(e)
+        return "NONE"
+
+def get_title(div):
+    try:
+        return div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"title"}).get_text()
+    except Exception as e:
+        print("get_title:")
+        print(div.parent.parent.parent.parent)
+        print(e)
+        return "NONE"
+
+def get_review_summary(div):
+    try:
+        elem = div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"search_review_summary"})
+        if elem is None:
+            return "NONE"
+        else:
+            return elem.get("data-tooltip-html")
+    except Exception as e:
+        print("get_review_summary:")
+        print(div.parent.parent.parent.parent)
+        print(e)
+        return "NONE"
+
+def get_href(div):
+    try:
+        return div.parent.parent.parent.parent.get("href")
+    except Exception as e:
+        print("get_href:")
+        print(div.parent.parent.parent.parent)
+        print(e)
+        return "NONE"
+
 
 # Get total count of free goods
 tryget_first_page = get_free_goods(0)
