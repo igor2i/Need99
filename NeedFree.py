@@ -49,7 +49,7 @@ def get_free_goods(start, append_list = False):
             full_discounts_div = page_parser.find_all(name = "div", attrs = {"class":"search_discount_block", "data-discount":"99"})
             sub_free_list = [
                 [
-                    div.parent.parent.parent.parent.find(name = "img").get_text(),
+                    div.parent.parent.parent.parent.find(name = "img"),
                     div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"title"}).get_text(),
                     div.parent.parent.parent.parent.find(name = "span", attrs = {"class":"search_review_summary"}).get_text(),
                     div.parent.parent.parent.parent.get("href"),
