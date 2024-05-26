@@ -22,7 +22,9 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
+								<th>Img</th>
 								<th>Game</th>
+								<th>Review summary</th>
 								<th>URL</th>
 							</tr>
 						</thead>
@@ -54,8 +56,13 @@
 						$('#uptime').text(data["update_time"]);
 						for (var i = 0; i < data["free_list"].length; ++i)
 						{
-							$('#listcontent').append("<tr class='table-success'><td>" + data["free_list"][i][0] + "</td>" + 
-								"<td><a href='" + data["free_list"][i][1] + "' style='text-decoration: none;' class='btn btn-primary'>Shop</a></td></tr>");
+							$('#listcontent')
+								.append(
+									"<tr class='table-success'>" + 
+									"<td><img src='" + data["free_list"][i][0] + "'></td>" + 
+									"<td>" + data["free_list"][i][1] + "</td>" + 
+									"<td>" + data["free_list"][i][2] + "</td>" + 
+								"<td><a href='" + data["free_list"][i][3] + "' style='text-decoration: none;' class='btn btn-primary'>Shop</a></td></tr>");
 						}
 					}
 				});
