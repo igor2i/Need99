@@ -6,6 +6,7 @@ import time
 import json
 import pytz
 import bs4
+import re
 
 
 API_URL_TEMPLATE = "https://store.steampowered.com/search/results/?query&start={pos}&count=100&infinite=1"
@@ -46,14 +47,14 @@ def get_free_goods(start, append_list = False):
             goods_count = response_json["total_count"]
             goods_html = response_json["results_html"]
             page_parser = bs4.BeautifulSoup(goods_html, "html.parser")
-            full_discounts_div = page_parser.find_all(name = "div", attrs = {"class":"search_discount_block", "data-discount":"95"})
+            discounts_div = page_parser.find_all(name = "div", attrs = {"class":"search_discount_block", "data-discount": re.compile("100|99|98|97|96|95")})
             sub_free_list = [
                 [
                     get_img_src(div),
                     get_title(div),
                     get_review_summary(div),
                     get_href(div),
-                ] for div in full_discounts_div
+                ] for div in discounts_div
             ]
 
             if append_list:
