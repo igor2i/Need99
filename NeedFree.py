@@ -46,7 +46,7 @@ def get_free_goods(start, append_list = False):
             goods_count = response_json["total_count"]
             goods_html = response_json["results_html"]
             page_parser = bs4.BeautifulSoup(goods_html, "html.parser")
-            full_discounts_div = page_parser.find_all(name = "div", attrs = {"class":"search_discount_block", "data-discount":"99"})
+            full_discounts_div = page_parser.find_all(name = "div", attrs = {"class":"search_discount_block", "data-discount":"95"})
             sub_free_list = [
                 [
                     get_img_src(div),
